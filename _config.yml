@@ -9,7 +9,7 @@
 title: 王爵的技术博客
 brief-intro: Java Dev
 baseurl: "/android" # the subpath of your site, e.g. /blog
-url: "https://smm113522.github.io/android" # the base hostname & protocol for your site
+url: "https://smm113522.github.io" # the base hostname & protocol for your site
 
 permalink: /:year/:month/:day/:title/
 
