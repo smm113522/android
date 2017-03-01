@@ -7,7 +7,7 @@
 
 # Site settings
 title: 王爵的技术博客
-brief-intro: Java Dev
+brief-intro: Android Dev
 baseurl: "/android" # the subpath of your site, e.g. /blog
 url: "https://smm113522.github.io" # the base hostname & protocol for your site
 
@@ -23,7 +23,7 @@ zhihu_username: smm113522
 linkedIn_username: 
 dribbble_username: 
 
-description_footer: 本站记录着后端的一些事儿！
+description_footer: 本站记录着android的一些事儿！
 
 # comments
 # two ways to comment, only choose one, and use your own short name
