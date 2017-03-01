@@ -8,18 +8,18 @@
 # Site settings
 title: 王爵的技术博客
 brief-intro: Java Dev
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://biezhi.me" # the base hostname & protocol for your site
+baseurl: "https://smm113522.github.io/android" # the subpath of your site, e.g. /blog
+url: "https://smm113522.github.io/android" # the base hostname & protocol for your site
 
 permalink: /:year/:month/:day/:title/
 
 # other links
-twitter_username: biezhii
+twitter_username: smm113522
 facebook_username: 
-github_username:  biezhi
-email: biezhi.me@gmail.com
-weibo_username: biezhii
-zhihu_username: biezhi
+github_username:  smm113522
+email: smm113522.me@gmail.com
+weibo_username: smm113522
+zhihu_username: smm113522
 linkedIn_username: 
 dribbble_username: 
 
