@@ -1,0 +1,60 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.1.3'
+        classpath "com.alibaba:arouter-register:1.0.2"
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        mavenCentral()
+        maven {
+            url 'https://maven.google.com/'
+            name 'Google'
+        }
+        maven { url "https://jitpack.io" }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+ext {
+    /* 所有版本 */
+    support_library_version = '28+'
+
+//    buildTools = '28.0.0'
+    compileSdk = 28
+    targetSdk = 28
+    minVersion = 15
+
+    /* 版本号设置 */
+    versionCodeN = 1
+    versionNameS = "1.0.0"
+
+    /* lib 版本 11月1号 */
+    annotationProcessor = "1.2.2"
+    routerVersion = "1.4.1"
+    annotation = "1.0.3"
+    easyRecyclerVersion = "4.4.0"
+    cookieVersion = "v1.0.1"
+    toastyVersion = "1.1.3"
+
+    glideVersion = "3.7.0"
+    loggerVersion = "1.15"
+    eventbusVersion = "3.0.0"
+    gsonVersion = "2.8.0"
+}

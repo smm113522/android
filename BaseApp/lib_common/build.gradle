@@ -1,0 +1,31 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion compileSdk
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.minVersion
+        targetSdkVersion rootProject.ext.targetSdk
+        versionCode rootProject.ext.versionCodeN
+        versionName rootProject.ext.versionNameS
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    api fileTree(dir: 'libs', include: ['*.jar'])
+
+    api "com.android.support:appcompat-v7:$rootProject.support_library_version"
+    api "com.android.support:design:$rootProject.support_library_version"
+    api "com.android.support:percent:$rootProject.support_library_version"
+    //router
+    api "com.alibaba:arouter-api:$rootProject.routerVersion"
+}
