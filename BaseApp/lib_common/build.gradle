@@ -28,4 +28,6 @@ dependencies {
     //router
     api "com.alibaba:arouter-api:$rootProject.routerVersion"
     api project(':lib_speed_tools')
+
+    api 'com.yanzhenjie:permission:2.0.0-rc12'
 }

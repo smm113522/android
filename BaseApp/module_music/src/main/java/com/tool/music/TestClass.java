@@ -11,10 +11,8 @@ public class TestClass extends SpeedBaseInterfaceImp {
 
     @Override
     public void onCreate(Bundle savedInstanceState, final Activity activity) {
-        this.activity=activity;
-
+        this.activity = activity;
         activity.setContentView(R.layout.activity_client_main);
-
 
 
     }

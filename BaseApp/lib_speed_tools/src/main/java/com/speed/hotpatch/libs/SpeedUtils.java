@@ -23,13 +23,13 @@ import java.lang.reflect.Method;
 import dalvik.system.DexClassLoader;
 
 /**
- *  by liyihang
+ * by liyihang
  */
 public class SpeedUtils {
 
-    public static final String tag="SpeedUtils";
+    public static final String tag = "SpeedUtils";
 
-    public static void msg(String tag, String msg){
+    public static void msg(String tag, String msg) {
         Log.i(tag, msg);
     }
 
@@ -47,72 +47,79 @@ public class SpeedUtils {
         return name;
     }
 
-    public static void goActivity(Activity activity, String apkName, String className){
-        Intent intent=new Intent(Intent.ACTION_VIEW, Uri.parse(SpeedConfig.ACTIVITY_URL));
+    public static void goActivity(Activity activity, String apkName, String className) {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(SpeedConfig.ACTIVITY_URL));
         intent.setPackage(activity.getPackageName());
         intent.putExtra(SpeedConfig.APK_NAME, apkName);
         intent.putExtra(SpeedConfig.CLASS_TAG, className);
-        msg(tag, "goActivity=="+apkName+"=="+className);
+        msg(tag, "goActivity==" + apkName + "==" + className);
         activity.startActivity(intent);
         msg(tag, "goActivity end");
     }
 
-    public static File getNativeApkPath(Context context,String name){
-        File file=null;
+    public static File getNativeApkPath(Context context, String name) {
+        File file = null;
         try {
             InputStream open = context.getAssets().open(name);
+//            byte[] bytes = new byte[open.available()];
+//            int len = open.read(bytes);
+
             File my_cache = context.getDir("my_cache", Context.MODE_PRIVATE);
-            file = new File(my_cache.getAbsolutePath() + name);
-            FileOutputStream fileOutputStream=new FileOutputStream(file);
-            int len=-1;
-            byte[] arr=new byte[1024];
-            while ( (len=open.read(arr))!=-1 )
-            {
-                fileOutputStream.write(arr,0,len);
+            String path = my_cache.getAbsolutePath();
+//            file = new File(path + "/" + name);
+            file = new File(Environment.getExternalStorageDirectory(), name);
+            FileOutputStream fileOutputStream = new FileOutputStream(file);
+
+//            fileOutputStream.write(bytes, 0, len);
+
+            int len = -1;
+            byte[] arr = new byte[1024];
+            while ((len = open.read(arr)) != -1) {
+                fileOutputStream.write(arr, 0, len);
             }
+
             fileOutputStream.flush();
             fileOutputStream.close();
             open.close();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
+        boolean isfile = file.exists();
+
         return file;
     }
 
     @SuppressWarnings("deprecation")
-    public static Resources readApkRes(Context context, String apkPath){
-        Resources resources1=null;
+    public static Resources readApkRes(Context context, String apkPath) {
+        Resources resources1 = null;
         try {
-            AssetManager assetManager=AssetManager.class.newInstance();
+            AssetManager assetManager = AssetManager.class.newInstance();
             Method addAssetPath = assetManager.getClass().getDeclaredMethod("addAssetPath", String.class);
             addAssetPath.invoke(assetManager, apkPath);
             Resources resources = context.getResources();
             resources1 = new Resources(assetManager, resources.getDisplayMetrics(), resources.getConfiguration());
         } catch (Exception e) {
             e.printStackTrace();
-            Log.i(tag,""+e.getMessage());
+            Log.i(tag, "" + e.getMessage());
         }
         return resources1;
     }
 
-    public static String getOutDexpaPath(Context context, String apkPath){
-        return context.getDir(apkPath ,Context.MODE_PRIVATE).getAbsolutePath();
+    public static String getOutDexpaPath(Context context, String apkPath) {
+        return context.getDir(apkPath, Context.MODE_PRIVATE).getAbsolutePath();
     }
 
-    public static String getRootPath(Context context){
-        String path=null;
-        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED))
-        {
-            if (Environment.getExternalStorageDirectory().exists())
-            {
+    public static String getRootPath(Context context) {
+        String path = null;
+        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+            if (Environment.getExternalStorageDirectory().exists()) {
                 path = Environment.getExternalStorageDirectory().getAbsolutePath();
             }
         }
-        if (path==null)
-        {
+        if (path == null) {
             File filesDir = context.getFilesDir();
-            if (filesDir.exists())
-            {
+            if (filesDir.exists()) {
                 path = filesDir.getAbsolutePath();
             }
         }
@@ -124,10 +131,10 @@ public class SpeedUtils {
         PackageInfo pkgInfo = null;
         try {
             pkgInfo = pm.getPackageArchiveInfo(apkFilepath, PackageManager.GET_ACTIVITIES | PackageManager.GET_SERVICES | PackageManager.GET_META_DATA);
-            Log.i(tag,"package obje=="+pkgInfo+"==path==="+apkFilepath);
+            Log.i(tag, "package obje==" + pkgInfo + "==path===" + apkFilepath);
         } catch (Exception e) {
             e.printStackTrace();
-            Log.i(tag,""+e.getMessage());
+            Log.i(tag, "" + e.getMessage());
         }
         return pkgInfo;
     }
@@ -139,7 +146,7 @@ public class SpeedUtils {
             pkgInfo = pm.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES | PackageManager.GET_SERVICES | PackageManager.GET_META_DATA);
         } catch (Exception e) {
             e.printStackTrace();
-            Log.i(tag,""+e.getMessage());
+            Log.i(tag, "" + e.getMessage());
         }
         return pkgInfo;
     }
@@ -160,13 +167,13 @@ public class SpeedUtils {
         return pm.getApplicationIcon(appInfo);
     }
 
-    public static DexClassLoader readDexFile(Context context, String apkPath, String outDexPath){
-        DexClassLoader dexClassLoader=null;
+    public static DexClassLoader readDexFile(Context context, String apkPath, String outDexPath) {
+        DexClassLoader dexClassLoader = null;
         try {
-            dexClassLoader=new DexClassLoader(apkPath, getOutDexpaPath(context, outDexPath), context.getApplicationInfo().nativeLibraryDir, context.getClassLoader());
+            dexClassLoader = new DexClassLoader(apkPath, getOutDexpaPath(context, outDexPath), context.getApplicationInfo().nativeLibraryDir, context.getClassLoader());
         } catch (Exception e) {
             e.printStackTrace();
-            Log.i(tag,""+e.getMessage());
+            Log.i(tag, "" + e.getMessage());
         }
         return dexClassLoader;
     }
