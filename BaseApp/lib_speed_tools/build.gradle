@@ -21,11 +21,6 @@ android {
 }
 
 dependencies {
-    api fileTree(include: ['*.jar'], dir: 'libs')
-    api "com.android.support:appcompat-v7:$rootProject.support_library_version"
-    api "com.android.support:design:$rootProject.support_library_version"
-    api "com.android.support:percent:$rootProject.support_library_version"
-    //router
-    api "com.alibaba:arouter-api:$rootProject.routerVersion"
-    api project(':lib_speed_tools')
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "com.android.support:appcompat-v7:$rootProject.support_library_version"
 }

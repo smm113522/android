@@ -1,1 +1,1 @@
-include ':app', ':module_main', ':lib_common', ':module_news'
+include ':app', ':module_main', ':lib_common', ':module_news', ':lib_speed_tools', ':module_music'
